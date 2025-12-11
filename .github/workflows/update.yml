@@ -26,7 +26,7 @@ jobs:
       run: pip install requests
 
     - name: Generate M3U
-      run: gol.py
+      run: Python gol.py
 
     - name: Commit M3U file
       run: |
