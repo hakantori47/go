@@ -1,0 +1,96 @@
+name: Update IPTV Playlist
+
+on:
+  workflow_dispatch:  # Manuel çalıştırma için
+  schedule:
+    # Her 20 dakikada bir çalıştır (cron formatında)
+    - cron: '*/20 * * * *'
+    # Alternatif: Her saat başı
+    - cron: '0 * * * *'
+  push:
+    branches: [ main ]  # Main branch'e push edilince çalışsın
+
+jobs:
+  update-playlist:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10  # Timeout süresi
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    
+    - name: Run IPTV Playlist Generator
+      run: |
+        python gol.py
+        echo "Playlist generation completed"
+    
+    - name: List generated files
+      run: |
+        echo "Generated files:"
+        ls -la *.m3u *.txt
+    
+    - name: Upload M3U files as artifact
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: m3u-playlists
+        path: |
+          *.m3u
+          update_summary.txt
+        retention-days: 7
+    
+    - name: Configure Git
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+    
+    - name: Commit and push changes
+      run: |
+        # Tüm M3U dosyalarını ekle
+        git add *.m3u update_summary.txt
+        
+        # Değişiklikleri kontrol et
+        if git diff --staged --quiet; then
+          echo "🔄 No changes to commit"
+        else
+          timestamp=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          git commit -m "🤖 Auto-update playlist at ${timestamp}"
+          git push
+          echo "✅ Changes committed and pushed"
+        fi
+    
+    - name: Create workflow summary
+      if: always()
+      run: |
+        echo "## 📡 TR-Goals IPTV Playlist Update" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f "update_summary.txt" ]; then
+          echo "**Update Summary:**" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat update_summary.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "**Generated Files:**" >> $GITHUB_STEP_SUMMARY
+        if [ -f "TR-Goals-IPTV.m3u" ]; then
+          m3u_size=$(stat -f%z "TR-Goals-IPTV.m3u" 2>/dev/null || stat -c%s "TR-Goals-IPTV.m3u" 2>/dev/null)
+          echo "- 📁 `TR-Goals-IPTV.m3u` (${m3u_size} bytes)" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Last Run:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "⏰ Next auto-run in 20 minutes" >> $GITHUB_STEP_SUMMARY
