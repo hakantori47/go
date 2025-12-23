@@ -1,5 +1,5 @@
 #EXTM3U
-# Last Updated: 2025-12-23 21:15:37
+# Last Updated: 2025-12-23 21:32:29
 #EXTINF:-1 tvg-id="" tvg-name="BEINSPORTS1 HD" tvg-logo="https://i.hizliresim.com/b6xqz10.jpg" group-title="DeaTHLesS-Goals",BEINSPORTS1 HD
 #EXTVLCOPT:http-referer=https://trgoals1495.xyz/
 https://ogr.d72577a9dd0ec6.sbs/yayinzirve.m3u8
@@ -39,6 +39,9 @@ https://ogr.d72577a9dd0ec6.sbs/yayint1.m3u8
 #EXTINF:-1 tvg-id="" tvg-name="TIVIBUSPORTS2 HD" tvg-logo="https://i.hizliresim.com/b6xqz10.jpg" group-title="DeaTHLesS-Goals",TIVIBUSPORTS2 HD
 #EXTVLCOPT:http-referer=https://trgoals1495.xyz/
 https://ogr.d72577a9dd0ec6.sbs/yayint2.m3u8
+#EXTINF:-1 tvg-id="" tvg-name="TIVIBUSPORTS3 HD" tvg-logo="https://i.hizliresim.com/b6xqz10.jpg" group-title="DeaTHLesS-Goals",TIVIBUSPORTS3 HD
+#EXTVLCOPT:http-referer=https://trgoals1495.xyz/
+https://ogr.d72577a9dd0ec6.sbs/yayint3.m3u8
 #EXTINF:-1 tvg-id="" tvg-name="TIVIBUSPORTS4 HD" tvg-logo="https://i.hizliresim.com/b6xqz10.jpg" group-title="DeaTHLesS-Goals",TIVIBUSPORTS4 HD
 #EXTVLCOPT:http-referer=https://trgoals1495.xyz/
 https://ogr.d72577a9dd0ec6.sbs/yayint4.m3u8
@@ -63,6 +66,9 @@ https://ogr.d72577a9dd0ec6.sbs/yayinatv.m3u8
 #EXTINF:-1 tvg-id="" tvg-name="TV8 HD" tvg-logo="https://i.hizliresim.com/b6xqz10.jpg" group-title="DeaTHLesS-Goals",TV8 HD
 #EXTVLCOPT:http-referer=https://trgoals1495.xyz/
 https://ogr.d72577a9dd0ec6.sbs/yayintv8.m3u8
+#EXTINF:-1 tvg-id="" tvg-name="TV85 HD" tvg-logo="https://i.hizliresim.com/b6xqz10.jpg" group-title="DeaTHLesS-Goals",TV85 HD
+#EXTVLCOPT:http-referer=https://trgoals1495.xyz/
+https://ogr.d72577a9dd0ec6.sbs/yayintv85.m3u8
 #EXTINF:-1 tvg-id="" tvg-name="NBATV HD" tvg-logo="https://i.hizliresim.com/b6xqz10.jpg" group-title="DeaTHLesS-Goals",NBATV HD
 #EXTVLCOPT:http-referer=https://trgoals1495.xyz/
 https://ogr.d72577a9dd0ec6.sbs/yayinnbatv.m3u8
